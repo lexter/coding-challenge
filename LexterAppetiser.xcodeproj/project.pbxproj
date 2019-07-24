@@ -1,0 +1,595 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		50C1FECC22E7E795003EE148 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C1FECB22E7E795003EE148 /* AppDelegate.swift */; };
+		50C1FECE22E7E795003EE148 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C1FECD22E7E795003EE148 /* MasterViewController.swift */; };
+		50C1FED022E7E795003EE148 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C1FECF22E7E795003EE148 /* DetailViewController.swift */; };
+		50C1FED322E7E795003EE148 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50C1FED122E7E795003EE148 /* Main.storyboard */; };
+		50C1FED522E7E796003EE148 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50C1FED422E7E796003EE148 /* Assets.xcassets */; };
+		50C1FED822E7E796003EE148 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50C1FED622E7E796003EE148 /* LaunchScreen.storyboard */; };
+		50C1FEE322E7E796003EE148 /* LexterAppetiserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C1FEE222E7E796003EE148 /* LexterAppetiserTests.swift */; };
+		50C1FEEE22E7E796003EE148 /* LexterAppetiserUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C1FEED22E7E796003EE148 /* LexterAppetiserUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		50C1FEDF22E7E796003EE148 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 50C1FEC022E7E795003EE148 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 50C1FEC722E7E795003EE148;
+			remoteInfo = LexterAppetiser;
+		};
+		50C1FEEA22E7E796003EE148 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 50C1FEC022E7E795003EE148 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 50C1FEC722E7E795003EE148;
+			remoteInfo = LexterAppetiser;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		50C1FEC822E7E795003EE148 /* LexterAppetiser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LexterAppetiser.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		50C1FECB22E7E795003EE148 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		50C1FECD22E7E795003EE148 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
+		50C1FECF22E7E795003EE148 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		50C1FED222E7E795003EE148 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		50C1FED422E7E796003EE148 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		50C1FED722E7E796003EE148 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		50C1FED922E7E796003EE148 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		50C1FEDE22E7E796003EE148 /* LexterAppetiserTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LexterAppetiserTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		50C1FEE222E7E796003EE148 /* LexterAppetiserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexterAppetiserTests.swift; sourceTree = "<group>"; };
+		50C1FEE422E7E796003EE148 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		50C1FEE922E7E796003EE148 /* LexterAppetiserUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LexterAppetiserUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		50C1FEED22E7E796003EE148 /* LexterAppetiserUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexterAppetiserUITests.swift; sourceTree = "<group>"; };
+		50C1FEEF22E7E796003EE148 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		50C1FEC522E7E795003EE148 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		50C1FEDB22E7E796003EE148 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		50C1FEE622E7E796003EE148 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		50C1FEBF22E7E795003EE148 = {
+			isa = PBXGroup;
+			children = (
+				50C1FECA22E7E795003EE148 /* LexterAppetiser */,
+				50C1FEE122E7E796003EE148 /* LexterAppetiserTests */,
+				50C1FEEC22E7E796003EE148 /* LexterAppetiserUITests */,
+				50C1FEC922E7E795003EE148 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		50C1FEC922E7E795003EE148 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				50C1FEC822E7E795003EE148 /* LexterAppetiser.app */,
+				50C1FEDE22E7E796003EE148 /* LexterAppetiserTests.xctest */,
+				50C1FEE922E7E796003EE148 /* LexterAppetiserUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		50C1FECA22E7E795003EE148 /* LexterAppetiser */ = {
+			isa = PBXGroup;
+			children = (
+				50C1FECB22E7E795003EE148 /* AppDelegate.swift */,
+				50C1FECD22E7E795003EE148 /* MasterViewController.swift */,
+				50C1FECF22E7E795003EE148 /* DetailViewController.swift */,
+				50C1FED122E7E795003EE148 /* Main.storyboard */,
+				50C1FED422E7E796003EE148 /* Assets.xcassets */,
+				50C1FED622E7E796003EE148 /* LaunchScreen.storyboard */,
+				50C1FED922E7E796003EE148 /* Info.plist */,
+			);
+			path = LexterAppetiser;
+			sourceTree = "<group>";
+		};
+		50C1FEE122E7E796003EE148 /* LexterAppetiserTests */ = {
+			isa = PBXGroup;
+			children = (
+				50C1FEE222E7E796003EE148 /* LexterAppetiserTests.swift */,
+				50C1FEE422E7E796003EE148 /* Info.plist */,
+			);
+			path = LexterAppetiserTests;
+			sourceTree = "<group>";
+		};
+		50C1FEEC22E7E796003EE148 /* LexterAppetiserUITests */ = {
+			isa = PBXGroup;
+			children = (
+				50C1FEED22E7E796003EE148 /* LexterAppetiserUITests.swift */,
+				50C1FEEF22E7E796003EE148 /* Info.plist */,
+			);
+			path = LexterAppetiserUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		50C1FEC722E7E795003EE148 /* LexterAppetiser */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 50C1FEF222E7E796003EE148 /* Build configuration list for PBXNativeTarget "LexterAppetiser" */;
+			buildPhases = (
+				50C1FEC422E7E795003EE148 /* Sources */,
+				50C1FEC522E7E795003EE148 /* Frameworks */,
+				50C1FEC622E7E795003EE148 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LexterAppetiser;
+			productName = LexterAppetiser;
+			productReference = 50C1FEC822E7E795003EE148 /* LexterAppetiser.app */;
+			productType = "com.apple.product-type.application";
+		};
+		50C1FEDD22E7E796003EE148 /* LexterAppetiserTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 50C1FEF522E7E796003EE148 /* Build configuration list for PBXNativeTarget "LexterAppetiserTests" */;
+			buildPhases = (
+				50C1FEDA22E7E796003EE148 /* Sources */,
+				50C1FEDB22E7E796003EE148 /* Frameworks */,
+				50C1FEDC22E7E796003EE148 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				50C1FEE022E7E796003EE148 /* PBXTargetDependency */,
+			);
+			name = LexterAppetiserTests;
+			productName = LexterAppetiserTests;
+			productReference = 50C1FEDE22E7E796003EE148 /* LexterAppetiserTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		50C1FEE822E7E796003EE148 /* LexterAppetiserUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 50C1FEF822E7E796003EE148 /* Build configuration list for PBXNativeTarget "LexterAppetiserUITests" */;
+			buildPhases = (
+				50C1FEE522E7E796003EE148 /* Sources */,
+				50C1FEE622E7E796003EE148 /* Frameworks */,
+				50C1FEE722E7E796003EE148 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				50C1FEEB22E7E796003EE148 /* PBXTargetDependency */,
+			);
+			name = LexterAppetiserUITests;
+			productName = LexterAppetiserUITests;
+			productReference = 50C1FEE922E7E796003EE148 /* LexterAppetiserUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		50C1FEC022E7E795003EE148 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1020;
+				LastUpgradeCheck = 1020;
+				ORGANIZATIONNAME = "Lexter Labra";
+				TargetAttributes = {
+					50C1FEC722E7E795003EE148 = {
+						CreatedOnToolsVersion = 10.2.1;
+					};
+					50C1FEDD22E7E796003EE148 = {
+						CreatedOnToolsVersion = 10.2.1;
+						TestTargetID = 50C1FEC722E7E795003EE148;
+					};
+					50C1FEE822E7E796003EE148 = {
+						CreatedOnToolsVersion = 10.2.1;
+						TestTargetID = 50C1FEC722E7E795003EE148;
+					};
+				};
+			};
+			buildConfigurationList = 50C1FEC322E7E795003EE148 /* Build configuration list for PBXProject "LexterAppetiser" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 50C1FEBF22E7E795003EE148;
+			productRefGroup = 50C1FEC922E7E795003EE148 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				50C1FEC722E7E795003EE148 /* LexterAppetiser */,
+				50C1FEDD22E7E796003EE148 /* LexterAppetiserTests */,
+				50C1FEE822E7E796003EE148 /* LexterAppetiserUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		50C1FEC622E7E795003EE148 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50C1FED822E7E796003EE148 /* LaunchScreen.storyboard in Resources */,
+				50C1FED522E7E796003EE148 /* Assets.xcassets in Resources */,
+				50C1FED322E7E795003EE148 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		50C1FEDC22E7E796003EE148 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		50C1FEE722E7E796003EE148 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		50C1FEC422E7E795003EE148 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50C1FED022E7E795003EE148 /* DetailViewController.swift in Sources */,
+				50C1FECE22E7E795003EE148 /* MasterViewController.swift in Sources */,
+				50C1FECC22E7E795003EE148 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		50C1FEDA22E7E796003EE148 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50C1FEE322E7E796003EE148 /* LexterAppetiserTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		50C1FEE522E7E796003EE148 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50C1FEEE22E7E796003EE148 /* LexterAppetiserUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		50C1FEE022E7E796003EE148 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 50C1FEC722E7E795003EE148 /* LexterAppetiser */;
+			targetProxy = 50C1FEDF22E7E796003EE148 /* PBXContainerItemProxy */;
+		};
+		50C1FEEB22E7E796003EE148 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 50C1FEC722E7E795003EE148 /* LexterAppetiser */;
+			targetProxy = 50C1FEEA22E7E796003EE148 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		50C1FED122E7E795003EE148 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				50C1FED222E7E795003EE148 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		50C1FED622E7E796003EE148 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				50C1FED722E7E796003EE148 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		50C1FEF022E7E796003EE148 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		50C1FEF122E7E796003EE148 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		50C1FEF322E7E796003EE148 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZZ75FS2Y78;
+				INFOPLIST_FILE = LexterAppetiser/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lexlab.LexterAppetiser;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		50C1FEF422E7E796003EE148 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZZ75FS2Y78;
+				INFOPLIST_FILE = LexterAppetiser/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lexlab.LexterAppetiser;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		50C1FEF622E7E796003EE148 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZZ75FS2Y78;
+				INFOPLIST_FILE = LexterAppetiserTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lexlab.LexterAppetiserTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LexterAppetiser.app/LexterAppetiser";
+			};
+			name = Debug;
+		};
+		50C1FEF722E7E796003EE148 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZZ75FS2Y78;
+				INFOPLIST_FILE = LexterAppetiserTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lexlab.LexterAppetiserTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LexterAppetiser.app/LexterAppetiser";
+			};
+			name = Release;
+		};
+		50C1FEF922E7E796003EE148 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZZ75FS2Y78;
+				INFOPLIST_FILE = LexterAppetiserUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lexlab.LexterAppetiserUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = LexterAppetiser;
+			};
+			name = Debug;
+		};
+		50C1FEFA22E7E796003EE148 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZZ75FS2Y78;
+				INFOPLIST_FILE = LexterAppetiserUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lexlab.LexterAppetiserUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = LexterAppetiser;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		50C1FEC322E7E795003EE148 /* Build configuration list for PBXProject "LexterAppetiser" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				50C1FEF022E7E796003EE148 /* Debug */,
+				50C1FEF122E7E796003EE148 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		50C1FEF222E7E796003EE148 /* Build configuration list for PBXNativeTarget "LexterAppetiser" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				50C1FEF322E7E796003EE148 /* Debug */,
+				50C1FEF422E7E796003EE148 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		50C1FEF522E7E796003EE148 /* Build configuration list for PBXNativeTarget "LexterAppetiserTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				50C1FEF622E7E796003EE148 /* Debug */,
+				50C1FEF722E7E796003EE148 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		50C1FEF822E7E796003EE148 /* Build configuration list for PBXNativeTarget "LexterAppetiserUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				50C1FEF922E7E796003EE148 /* Debug */,
+				50C1FEFA22E7E796003EE148 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 50C1FEC022E7E795003EE148 /* Project object */;
+}
