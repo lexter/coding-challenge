@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		50C1FF1122E7F6AB003EE148 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C1FF1022E7F6AB003EE148 /* AppDelegate.swift */; };
-		50C1FF1422E7F6AB003EE148 /* LexterAppetiser.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 50C1FF1222E7F6AB003EE148 /* LexterAppetiser.xcdatamodeld */; };
 		50C1FF1622E7F6AB003EE148 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C1FF1522E7F6AB003EE148 /* MasterViewController.swift */; };
 		50C1FF1822E7F6AB003EE148 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C1FF1722E7F6AB003EE148 /* DetailViewController.swift */; };
 		50C1FF1B22E7F6AB003EE148 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50C1FF1922E7F6AB003EE148 /* Main.storyboard */; };
@@ -16,6 +15,10 @@
 		50C1FF2022E7F6AC003EE148 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50C1FF1E22E7F6AC003EE148 /* LaunchScreen.storyboard */; };
 		50C1FF2B22E7F6AC003EE148 /* LexterAppetiserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C1FF2A22E7F6AC003EE148 /* LexterAppetiserTests.swift */; };
 		50C1FF3622E7F6AC003EE148 /* LexterAppetiserUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C1FF3522E7F6AC003EE148 /* LexterAppetiserUITests.swift */; };
+		50C1FF4922E80B7D003EE148 /* Track+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C1FF4722E80B7D003EE148 /* Track+CoreDataClass.swift */; };
+		50C1FF4A22E80B7D003EE148 /* Track+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C1FF4822E80B7D003EE148 /* Track+CoreDataProperties.swift */; };
+		50C1FF4B22E80D3E003EE148 /* LexterAppetiser.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = 50C1FF1222E7F6AB003EE148 /* LexterAppetiser.xcdatamodeld */; };
+		50C1FF4D22E81D16003EE148 /* TrackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C1FF4C22E81D16003EE148 /* TrackCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +54,9 @@
 		50C1FF3122E7F6AC003EE148 /* LexterAppetiserUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LexterAppetiserUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		50C1FF3522E7F6AC003EE148 /* LexterAppetiserUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexterAppetiserUITests.swift; sourceTree = "<group>"; };
 		50C1FF3722E7F6AC003EE148 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		50C1FF4722E80B7D003EE148 /* Track+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Track+CoreDataClass.swift"; sourceTree = "<group>"; };
+		50C1FF4822E80B7D003EE148 /* Track+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Track+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		50C1FF4C22E81D16003EE148 /* TrackCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +107,8 @@
 		50C1FF0F22E7F6AB003EE148 /* LexterAppetiser */ = {
 			isa = PBXGroup;
 			children = (
+				50C1FF4722E80B7D003EE148 /* Track+CoreDataClass.swift */,
+				50C1FF4822E80B7D003EE148 /* Track+CoreDataProperties.swift */,
 				50C1FF1022E7F6AB003EE148 /* AppDelegate.swift */,
 				50C1FF1522E7F6AB003EE148 /* MasterViewController.swift */,
 				50C1FF1722E7F6AB003EE148 /* DetailViewController.swift */,
@@ -109,6 +117,7 @@
 				50C1FF1E22E7F6AC003EE148 /* LaunchScreen.storyboard */,
 				50C1FF2122E7F6AC003EE148 /* Info.plist */,
 				50C1FF1222E7F6AB003EE148 /* LexterAppetiser.xcdatamodeld */,
+				50C1FF4C22E81D16003EE148 /* TrackCell.swift */,
 			);
 			path = LexterAppetiser;
 			sourceTree = "<group>";
@@ -235,6 +244,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50C1FF4B22E80D3E003EE148 /* LexterAppetiser.xcdatamodeld in Resources */,
 				50C1FF2022E7F6AC003EE148 /* LaunchScreen.storyboard in Resources */,
 				50C1FF1D22E7F6AC003EE148 /* Assets.xcassets in Resources */,
 				50C1FF1B22E7F6AB003EE148 /* Main.storyboard in Resources */,
@@ -262,10 +272,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50C1FF4922E80B7D003EE148 /* Track+CoreDataClass.swift in Sources */,
 				50C1FF1122E7F6AB003EE148 /* AppDelegate.swift in Sources */,
-				50C1FF1422E7F6AB003EE148 /* LexterAppetiser.xcdatamodeld in Sources */,
 				50C1FF1622E7F6AB003EE148 /* MasterViewController.swift in Sources */,
 				50C1FF1822E7F6AB003EE148 /* DetailViewController.swift in Sources */,
+				50C1FF4A22E80B7D003EE148 /* Track+CoreDataProperties.swift in Sources */,
+				50C1FF4D22E81D16003EE148 /* TrackCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

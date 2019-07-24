@@ -10,15 +10,19 @@ import UIKit
 import CoreData
 
 class MasterViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+    
+    let defaultSession = URLSession(configuration: .default)
+    var dataTask: URLSessionDataTask?
 
     var detailViewController: DetailViewController? = nil
     var managedObjectContext: NSManagedObjectContext? = nil
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         navigationItem.leftBarButtonItem = editButtonItem
+        
+        self.configureSearchController()
 
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewObject(_:)))
         navigationItem.rightBarButtonItem = addButton
@@ -26,6 +30,122 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             let controllers = split.viewControllers
             detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
         }
+        
+        self.executeSearch(["",""], completion: { [unowned self] results in
+            DispatchQueue.main.async(execute: {
+                
+                let context = self.fetchedResultsController.managedObjectContext
+                
+                let ids = (results)
+                    .map({ (item) -> String in
+                        if let trackId = item["trackId"] as? Int64 {
+                            return "trackId == \(trackId)"
+                        }
+                        return ""
+                    })
+                    .joined(separator: " OR ")
+                
+                var existingIds: [Int64] = []
+                
+                let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Track")
+                fetchRequest.predicate = NSPredicate(format: "\(ids)")
+                do {
+                    let fRes = try context.fetch(fetchRequest)
+                    if fRes.count > 0 {
+                        existingIds = (fRes as! [Track])
+                                        .map({ (item) -> Int64 in
+                                            item.trackId
+                                        })
+                    }
+                }
+                catch {
+                    print("FETCH ERROR")
+                }
+                
+                _ = (results)
+                    .filter({ (item) -> Bool in
+                        if let trackId = item["trackId"] as? Int64 {
+                            return !existingIds.contains(trackId)
+                        }
+                        return false
+                    })
+                    .map({ (item) -> Track in
+                        let track = Track(context: context)
+                        
+                        if let trackId = item["trackId"] as? Int64 {
+                            track.trackId = trackId
+                        }
+                        if let trackName = item["trackName"] as? String {
+                            track.trackName = trackName
+                        }
+                        if let trackViewUrl = item["trackViewUrl"] as? String {
+                            track.trackViewUrl = trackViewUrl
+                        }
+                        if let previewUrl = item["previewUrl"] as? String {
+                            track.previewUrl = previewUrl
+                        }
+                        if let artworkUrl30 = item["artworkUrl30"] as? String {
+                            track.artworkUrl30 = artworkUrl30
+                        }
+                        if let artworkUrl60 = item["artworkUrl60"] as? String {
+                            track.artworkUrl60 = artworkUrl60
+                        }
+                        if let artworkUrl100 = item["artworkUrl100"] as? String {
+                            track.artworkUrl100 = artworkUrl100
+                        }
+                        if let collectionPrice = item["collectionPrice"] as? Double {
+                            track.collectionPrice = collectionPrice
+                        }
+                        if let currency = item["currency"] as? String {
+                            track.currency = currency
+                        }
+                        if let trackPrice = item["trackPrice"] as? Double {
+                            track.trackPrice = trackPrice
+                        }
+                        if let trackRentalPrice = item["trackRentalPrice"] as? Double {
+                            track.trackRentalPrice = trackRentalPrice
+                        }
+                        if let collectionHdPrice = item["collectionHdPrice"] as? Double {
+                            track.collectionHdPrice = collectionHdPrice
+                        }
+                        if let trackHdPrice = item["trackHdPrice"] as? Double {
+                            track.trackHdPrice = trackHdPrice
+                        }
+                        if let trackHdRentalPrice = item["trackHdRentalPrice"] as? Double {
+                            track.trackHdRentalPrice = trackHdRentalPrice
+                        }
+                        if let releaseDate = item["releaseDate"] as? String {
+                            let dateFormatter = DateFormatter()
+                            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+                            dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
+                            track.releaseDate = dateFormatter.date(from: releaseDate)! as NSDate
+                        }
+                        if let primaryGenreName = item["primaryGenreName"] as? String {
+                            track.primaryGenreName = primaryGenreName
+                        }
+                        if let contentAdvisoryRating = item["contentAdvisoryRating"] as? String {
+                            track.contentAdvisoryRating = contentAdvisoryRating
+                        }
+                        if let shortDescription = item["shortDescription"] as? String {
+                            track.trackShortDescription = shortDescription
+                        }
+                        if let longDescription = item["longDescription"] as? String {
+                            track.trackLongDescription = longDescription
+                        }
+                        return track
+                    })
+                
+                // Save the context.
+                do {
+                    try context.save()
+                } catch {
+                    // Replace this implementation with code to handle the error appropriately.
+                    // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                    let nserror = error as NSError
+                    fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+                }
+            })
+        })
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -35,21 +155,21 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 
     @objc
     func insertNewObject(_ sender: Any) {
-        let context = self.fetchedResultsController.managedObjectContext
-        let newEvent = Event(context: context)
-             
-        // If appropriate, configure the new managed object.
-        newEvent.timestamp = Date()
-
-        // Save the context.
-        do {
-            try context.save()
-        } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            let nserror = error as NSError
-            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-        }
+//        let context = self.fetchedResultsController.managedObjectContext
+//        let newEvent = Event(context: context)
+//
+//        // If appropriate, configure the new managed object.
+//        newEvent.timestamp = Date()
+//
+//        // Save the context.
+//        do {
+//            try context.save()
+//        } catch {
+//            // Replace this implementation with code to handle the error appropriately.
+//            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+//            let nserror = error as NSError
+//            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+//        }
     }
 
     // MARK: - Segues
@@ -78,7 +198,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TrackCell", for: indexPath) as! TrackCell
         let event = fetchedResultsController.object(at: indexPath)
         configureCell(cell, withEvent: event)
         return cell
@@ -105,24 +225,57 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         }
     }
 
-    func configureCell(_ cell: UITableViewCell, withEvent event: Event) {
-        cell.textLabel!.text = event.timestamp!.description
+    func configureCell(_ cell: TrackCell, withEvent event: Track) {
+        cell.titleLabel?.text = event.trackName
+        cell.genreLabel?.text = event.primaryGenreName
+        cell.priceLabel?.text = "\(String(describing: event.currency)) \(event.trackPrice)"
+        
+        if cell.imageObj == nil && !cell.isDownloading {
+            self.defaultSession.dataTask(with: URL(string: event.artworkUrl100!)!) { (data, resp, error) in
+                DispatchQueue.main.async(execute: {
+                    cell.isDownloading = false
+                    cell.activityView.isHidden = true
+                    cell.activityView.stopAnimating()
+                    
+                    guard error == nil else {
+                        return
+                    }
+                    cell.imageObj = UIImage(data: data!)
+                    cell.trackImageView.image = cell.imageObj
+                })
+            }.resume()
+            cell.isDownloading = true
+            cell.activityView.isHidden = false
+            cell.activityView.startAnimating()
+        }
+        else {
+            cell.trackImageView.image = UIImage(named: "Placeholder")
+        }
+        
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 110
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Today"
     }
 
     // MARK: - Fetched results controller
 
-    var fetchedResultsController: NSFetchedResultsController<Event> {
+    var fetchedResultsController: NSFetchedResultsController<Track> {
         if _fetchedResultsController != nil {
             return _fetchedResultsController!
         }
         
-        let fetchRequest: NSFetchRequest<Event> = Event.fetchRequest()
+        let fetchRequest: NSFetchRequest<Track> = Track.fetchRequest()
         
         // Set the batch size to a suitable number.
         fetchRequest.fetchBatchSize = 20
         
         // Edit the sort key as appropriate.
-        let sortDescriptor = NSSortDescriptor(key: "timestamp", ascending: false)
+        let sortDescriptor = NSSortDescriptor(key: "trackId", ascending: false)
         
         fetchRequest.sortDescriptors = [sortDescriptor]
         
@@ -143,7 +296,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         
         return _fetchedResultsController!
     }    
-    var _fetchedResultsController: NSFetchedResultsController<Event>? = nil
+    var _fetchedResultsController: NSFetchedResultsController<Track>? = nil
 
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
@@ -167,9 +320,9 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             case .delete:
                 tableView.deleteRows(at: [indexPath!], with: .fade)
             case .update:
-                configureCell(tableView.cellForRow(at: indexPath!)!, withEvent: anObject as! Event)
+                configureCell(tableView.cellForRow(at: indexPath!) as! TrackCell, withEvent: anObject as! Track)
             case .move:
-                configureCell(tableView.cellForRow(at: indexPath!)!, withEvent: anObject as! Event)
+                configureCell(tableView.cellForRow(at: indexPath!) as! TrackCell, withEvent: anObject as! Track)
                 tableView.moveRow(at: indexPath!, to: newIndexPath!)
         }
     }
@@ -189,3 +342,46 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 
 }
 
+// MARK: - Extensions
+
+extension MasterViewController: UISearchResultsUpdating {
+    
+    func configureSearchController() {
+        let search = UISearchController(searchResultsController: nil)
+        search.searchResultsUpdater = self
+        search.obscuresBackgroundDuringPresentation = false
+        search.searchBar.placeholder = "Type something here to search"
+        navigationItem.searchController = search
+    }
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text else { return }
+        print(text)
+    }
+}
+
+extension MasterViewController {
+    
+    func executeSearch(_ params: [String], completion: @escaping (_ results: [[String: Any]]) -> Void) {
+        let baseURL = "https://itunes.apple.com/search?term=star&country=au&media=movie&all"
+        print("executeSearch")
+        self.defaultSession.dataTask(with: URL(string: baseURL)!) { (data, response, error) in
+            guard error == nil else {
+                print("HTTP ERROR ---> \(error!)")
+                completion([])
+                return
+            }
+            do {
+                let parsedJSON = try JSONSerialization.jsonObject(with: data!) as! [String: Any]
+                let results = parsedJSON["results"]
+                completion(results as! [[String: Any]])
+            }
+            catch let e {
+                print("ERROR PARSING ---> \(e)")
+                completion([])
+            }
+            
+        }.resume()
+    }
+    
+}
