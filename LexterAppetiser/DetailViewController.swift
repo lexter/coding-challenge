@@ -7,17 +7,23 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class DetailViewController: UIViewController {
 
     @IBOutlet weak var detailDescriptionLabel: UILabel!
-
+    var track: TrackModel! {
+        didSet {
+            configureView()
+        }
+    }
 
     func configureView() {
         // Update the user interface for the detail item.
-        if let detail = detailItem {
+        if let detail = track {
             if let label = detailDescriptionLabel {
-                label.text = detail.description
+                label.text = track.title
             }
         }
     }

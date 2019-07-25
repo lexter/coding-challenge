@@ -10,15 +10,14 @@
 		00C72BF915E3971C94DEBEFF /* Pods_LexterAppetiserUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E91DA9F790D62A0545AA6F2A /* Pods_LexterAppetiserUITests.framework */; };
 		3C8E97F39D6C512CF9FACB0D /* Pods_LexterAppetiserTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A452AA8FA3AF69D37F8EE2F7 /* Pods_LexterAppetiserTests.framework */; };
 		50C1FECC22E7E795003EE148 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C1FECB22E7E795003EE148 /* AppDelegate.swift */; };
-		50C1FECE22E7E795003EE148 /* MasterViewControllerOrig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C1FECD22E7E795003EE148 /* MasterViewControllerOrig.swift */; };
+		50C1FECE22E7E795003EE148 /* MasterViewControllerOO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C1FECD22E7E795003EE148 /* MasterViewControllerOO.swift */; };
 		50C1FED022E7E795003EE148 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C1FECF22E7E795003EE148 /* DetailViewController.swift */; };
 		50C1FED322E7E795003EE148 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50C1FED122E7E795003EE148 /* Main.storyboard */; };
 		50C1FED522E7E796003EE148 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50C1FED422E7E796003EE148 /* Assets.xcassets */; };
 		50C1FED822E7E796003EE148 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50C1FED622E7E796003EE148 /* LaunchScreen.storyboard */; };
 		50C1FEE322E7E796003EE148 /* LexterAppetiserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C1FEE222E7E796003EE148 /* LexterAppetiserTests.swift */; };
 		50C1FEEE22E7E796003EE148 /* LexterAppetiserUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C1FEED22E7E796003EE148 /* LexterAppetiserUITests.swift */; };
-		50C1FEFC22E7EB97003EE148 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C1FEFB22E7EB97003EE148 /* MasterViewController.swift */; };
-		50C1FF0322E7F28F003EE148 /* TrackModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C1FF0222E7F28F003EE148 /* TrackModel.swift */; };
+		50F1FE5E22E92F1200046F0C /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F1FE5D22E92F1200046F0C /* MasterViewController.swift */; };
 		A227B8F986F35DB04E9EFB64 /* Pods_LexterAppetiser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4D8697ADFE6A74C124392E3 /* Pods_LexterAppetiser.framework */; };
 /* End PBXBuildFile section */
 
@@ -45,7 +44,7 @@
 		3DA8AE7BC0473A9034286346 /* Pods-LexterAppetiserUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LexterAppetiserUITests.release.xcconfig"; path = "Target Support Files/Pods-LexterAppetiserUITests/Pods-LexterAppetiserUITests.release.xcconfig"; sourceTree = "<group>"; };
 		50C1FEC822E7E795003EE148 /* LexterAppetiser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LexterAppetiser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50C1FECB22E7E795003EE148 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		50C1FECD22E7E795003EE148 /* MasterViewControllerOrig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewControllerOrig.swift; sourceTree = "<group>"; };
+		50C1FECD22E7E795003EE148 /* MasterViewControllerOO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewControllerOO.swift; sourceTree = "<group>"; };
 		50C1FECF22E7E795003EE148 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		50C1FED222E7E795003EE148 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		50C1FED422E7E796003EE148 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -57,8 +56,7 @@
 		50C1FEE922E7E796003EE148 /* LexterAppetiserUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LexterAppetiserUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		50C1FEED22E7E796003EE148 /* LexterAppetiserUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexterAppetiserUITests.swift; sourceTree = "<group>"; };
 		50C1FEEF22E7E796003EE148 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		50C1FEFB22E7EB97003EE148 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
-		50C1FF0222E7F28F003EE148 /* TrackModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackModel.swift; sourceTree = "<group>"; };
+		50F1FE5D22E92F1200046F0C /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		90402B3B42903E65B9E4670E /* Pods-LexterAppetiserTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LexterAppetiserTests.release.xcconfig"; path = "Target Support Files/Pods-LexterAppetiserTests/Pods-LexterAppetiserTests.release.xcconfig"; sourceTree = "<group>"; };
 		9A76C9CBE3AEBDBEF5E80ED3 /* Pods-LexterAppetiser.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LexterAppetiser.release.xcconfig"; path = "Target Support Files/Pods-LexterAppetiser/Pods-LexterAppetiser.release.xcconfig"; sourceTree = "<group>"; };
 		A452AA8FA3AF69D37F8EE2F7 /* Pods_LexterAppetiserTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LexterAppetiserTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -121,14 +119,13 @@
 			isa = PBXGroup;
 			children = (
 				50C1FECB22E7E795003EE148 /* AppDelegate.swift */,
-				50C1FECD22E7E795003EE148 /* MasterViewControllerOrig.swift */,
-				50C1FEFB22E7EB97003EE148 /* MasterViewController.swift */,
+				50C1FECD22E7E795003EE148 /* MasterViewControllerOO.swift */,
+				50F1FE5D22E92F1200046F0C /* MasterViewController.swift */,
 				50C1FECF22E7E795003EE148 /* DetailViewController.swift */,
 				50C1FED122E7E795003EE148 /* Main.storyboard */,
 				50C1FED422E7E796003EE148 /* Assets.xcassets */,
 				50C1FED622E7E796003EE148 /* LaunchScreen.storyboard */,
 				50C1FED922E7E796003EE148 /* Info.plist */,
-				50C1FF0222E7F28F003EE148 /* TrackModel.swift */,
 			);
 			path = LexterAppetiser;
 			sourceTree = "<group>";
@@ -431,10 +428,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				50C1FEFC22E7EB97003EE148 /* MasterViewController.swift in Sources */,
 				50C1FED022E7E795003EE148 /* DetailViewController.swift in Sources */,
-				50C1FECE22E7E795003EE148 /* MasterViewControllerOrig.swift in Sources */,
-				50C1FF0322E7F28F003EE148 /* TrackModel.swift in Sources */,
+				50C1FECE22E7E795003EE148 /* MasterViewControllerOO.swift in Sources */,
+				50F1FE5E22E92F1200046F0C /* MasterViewController.swift in Sources */,
 				50C1FECC22E7E795003EE148 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
