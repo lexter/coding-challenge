@@ -19,6 +19,7 @@
 		50C1FF4A22E80B7D003EE148 /* Track+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C1FF4822E80B7D003EE148 /* Track+CoreDataProperties.swift */; };
 		50C1FF4B22E80D3E003EE148 /* LexterAppetiser.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = 50C1FF1222E7F6AB003EE148 /* LexterAppetiser.xcdatamodeld */; };
 		50C1FF4D22E81D16003EE148 /* TrackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C1FF4C22E81D16003EE148 /* TrackCell.swift */; };
+		DDADEFC422EC8E33005B24E2 /* NSManagedObject+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDADEFC322EC8E33005B24E2 /* NSManagedObject+Custom.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		50C1FF4722E80B7D003EE148 /* Track+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Track+CoreDataClass.swift"; sourceTree = "<group>"; };
 		50C1FF4822E80B7D003EE148 /* Track+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Track+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		50C1FF4C22E81D16003EE148 /* TrackCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackCell.swift; sourceTree = "<group>"; };
+		DDADEFC322EC8E33005B24E2 /* NSManagedObject+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+Custom.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,12 +114,13 @@
 				50C1FF1022E7F6AB003EE148 /* AppDelegate.swift */,
 				50C1FF1522E7F6AB003EE148 /* MasterViewController.swift */,
 				50C1FF1722E7F6AB003EE148 /* DetailViewController.swift */,
+				50C1FF4C22E81D16003EE148 /* TrackCell.swift */,
 				50C1FF1922E7F6AB003EE148 /* Main.storyboard */,
 				50C1FF1C22E7F6AC003EE148 /* Assets.xcassets */,
 				50C1FF1E22E7F6AC003EE148 /* LaunchScreen.storyboard */,
 				50C1FF2122E7F6AC003EE148 /* Info.plist */,
 				50C1FF1222E7F6AB003EE148 /* LexterAppetiser.xcdatamodeld */,
-				50C1FF4C22E81D16003EE148 /* TrackCell.swift */,
+				DDADEFC322EC8E33005B24E2 /* NSManagedObject+Custom.swift */,
 			);
 			path = LexterAppetiser;
 			sourceTree = "<group>";
@@ -278,6 +281,7 @@
 				50C1FF1822E7F6AB003EE148 /* DetailViewController.swift in Sources */,
 				50C1FF4A22E80B7D003EE148 /* Track+CoreDataProperties.swift in Sources */,
 				50C1FF4D22E81D16003EE148 /* TrackCell.swift in Sources */,
+				DDADEFC422EC8E33005B24E2 /* NSManagedObject+Custom.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

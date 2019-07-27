@@ -33,7 +33,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         
         self.executeSearch(["",""], completion: { [unowned self] results in
             DispatchQueue.main.async(execute: {
-                
+            
                 let context = self.fetchedResultsController.managedObjectContext
                 
                 let ids = (results)
@@ -63,87 +63,56 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
                 }
                 
                 _ = (results)
-                    .filter({ (item) -> Bool in
-                        if let trackId = item["trackId"] as? Int64 {
+                    .filter {
+                        if let trackId = $0["trackId"] as? Int64 {
                             return !existingIds.contains(trackId)
                         }
                         return false
-                    })
-                    .map({ (item) -> Track in
-                        let track = Track(context: context)
+                    }
+                    .map({ item -> Track in
+                        let t = Track.createInContext(context)
+                        t.mapData(item)
                         
-                        if let trackId = item["trackId"] as? Int64 {
-                            track.trackId = trackId
-                        }
-                        if let trackName = item["trackName"] as? String {
-                            track.trackName = trackName
-                        }
-                        if let trackViewUrl = item["trackViewUrl"] as? String {
-                            track.trackViewUrl = trackViewUrl
-                        }
-                        if let previewUrl = item["previewUrl"] as? String {
-                            track.previewUrl = previewUrl
-                        }
-                        if let artworkUrl30 = item["artworkUrl30"] as? String {
-                            track.artworkUrl30 = artworkUrl30
-                        }
-                        if let artworkUrl60 = item["artworkUrl60"] as? String {
-                            track.artworkUrl60 = artworkUrl60
-                        }
-                        if let artworkUrl100 = item["artworkUrl100"] as? String {
-                            track.artworkUrl100 = artworkUrl100
-                        }
-                        if let collectionPrice = item["collectionPrice"] as? Double {
-                            track.collectionPrice = collectionPrice
-                        }
-                        if let currency = item["currency"] as? String {
-                            track.currency = currency
-                        }
-                        if let trackPrice = item["trackPrice"] as? Double {
-                            track.trackPrice = trackPrice
-                        }
-                        if let trackRentalPrice = item["trackRentalPrice"] as? Double {
-                            track.trackRentalPrice = trackRentalPrice
-                        }
-                        if let collectionHdPrice = item["collectionHdPrice"] as? Double {
-                            track.collectionHdPrice = collectionHdPrice
-                        }
-                        if let trackHdPrice = item["trackHdPrice"] as? Double {
-                            track.trackHdPrice = trackHdPrice
-                        }
-                        if let trackHdRentalPrice = item["trackHdRentalPrice"] as? Double {
-                            track.trackHdRentalPrice = trackHdRentalPrice
-                        }
-                        if let releaseDate = item["releaseDate"] as? String {
-                            let dateFormatter = DateFormatter()
-                            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-                            dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
-                            track.releaseDate = dateFormatter.date(from: releaseDate)! as NSDate
-                        }
-                        if let primaryGenreName = item["primaryGenreName"] as? String {
-                            track.primaryGenreName = primaryGenreName
-                        }
-                        if let contentAdvisoryRating = item["contentAdvisoryRating"] as? String {
-                            track.contentAdvisoryRating = contentAdvisoryRating
-                        }
-                        if let shortDescription = item["shortDescription"] as? String {
-                            track.trackShortDescription = shortDescription
-                        }
-                        if let longDescription = item["longDescription"] as? String {
-                            track.trackLongDescription = longDescription
-                        }
-                        return track
+                        if let url = URL(string: t.artworkUrl100!) {
+                            
+                            var filename = url.pathComponents.last!
+                            let ext = filename.components(separatedBy: ".").last!
+                            
+                            self.defaultSession.dataTask(with: url) { [unowned self] (data, resp, error) in
+                                
+                                guard error == nil else {
+                                    t.isDownloadingArtwork = false
+                                    return
+                                }
+                                
+                                let tempDir = NSURL.fileURL(withPath: NSTemporaryDirectory(), isDirectory: true)
+                                filename = "\(UUID().uuidString).\(ext)"
+                                let targetURL = tempDir.appendingPathComponent(filename)
+                                t.localArtworkPath = filename
+                                t.isDownloadingArtwork = true
+                                
+                                do {
+                                    try data!.write(to: targetURL)
+                                }
+                                catch let e {
+                                    print(e)
+                                }
+                                
+                            }.resume()
+                        } // END OF: if let url = URL(string: t.artworkUrl100!) {
+                        
+                        return t
                     })
                 
                 // Save the context.
-                do {
-                    try context.save()
-                } catch {
-                    // Replace this implementation with code to handle the error appropriately.
-                    // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                    let nserror = error as NSError
-                    fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-                }
+//                do {
+//                    try context.save()
+//                } catch {
+//                    // Replace this implementation with code to handle the error appropriately.
+//                    // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+//                    let nserror = error as NSError
+//                    fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+//                }
             })
         })
     }
@@ -226,32 +195,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     }
 
     func configureCell(_ cell: TrackCell, withEvent event: Track) {
-        cell.titleLabel?.text = event.trackName
-        cell.genreLabel?.text = event.primaryGenreName
-        cell.priceLabel?.text = "\(String(describing: event.currency)) \(event.trackPrice)"
-        
-        if cell.imageObj == nil && !cell.isDownloading {
-            self.defaultSession.dataTask(with: URL(string: event.artworkUrl100!)!) { (data, resp, error) in
-                DispatchQueue.main.async(execute: {
-                    cell.isDownloading = false
-                    cell.activityView.isHidden = true
-                    cell.activityView.stopAnimating()
-                    
-                    guard error == nil else {
-                        return
-                    }
-                    cell.imageObj = UIImage(data: data!)
-                    cell.trackImageView.image = cell.imageObj
-                })
-            }.resume()
-            cell.isDownloading = true
-            cell.activityView.isHidden = false
-            cell.activityView.startAnimating()
-        }
-        else {
-            cell.trackImageView.image = UIImage(named: "Placeholder")
-        }
-        
+        cell.cellData = event
+        cell.configure()
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

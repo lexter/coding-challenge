@@ -10,7 +10,6 @@
 import Foundation
 import CoreData
 
-
 extension Track {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Track> {
@@ -24,6 +23,8 @@ extension Track {
     @NSManaged public var primaryGenreName: String?
     @NSManaged public var contentAdvisoryRating: String?
     @NSManaged public var currency: String?
+    @NSManaged public var localArtworkPath: String?
+    @NSManaged public var isDownloadingArtwork: Bool
     @NSManaged public var trackLongDescription: String?
     @NSManaged public var trackShortDescription: String?
     @NSManaged public var trackId: Int64
@@ -38,4 +39,43 @@ extension Track {
     @NSManaged public var trackHdRentalPrice: Double
     @NSManaged public var releaseDate: NSDate?
 
+}
+
+/// Utils
+extension Track {
+    
+    
+    /// Taken from https://stackoverflow.com/questions/38985660/mirror-not-working-in-swift-when-iterating-through-children-of-an-objective-c-ob/38987424#38987424
+    /// - return [String]
+    func properties() -> [String] {
+        var outCount : UInt32 = 0
+        let properties = class_copyPropertyList(Track.self, &outCount)
+        var props: [String] = []
+        
+        for i : UInt32 in 0..<outCount
+        {
+            let strKey : NSString? = NSString(cString: property_getName(properties![Int(i)]), encoding: String.Encoding.utf8.rawValue)
+            props.append(strKey! as String)
+        }
+        
+        return props
+    }
+    
+    func mapData(_ data: [String: Any]) {
+        for key in self.properties() {
+            switch (key) {
+                case "trackShortDescription": self.setValue(data["shortDescription"], forKey: key)
+                case "trackLongDescription": self.setValue(data["longDescription"], forKey: key)
+                case "releaseDate":
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+                    dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
+                    self.setValue(dateFormatter.date(from: data["releaseDate"] as! String)! as NSDate, forKey: key)
+                case "localArtworkPath": continue
+                case "isDownloadingArtwork": self.setValue(false, forKey: key)
+                default: self.setValue(data[key], forKey: key)
+            }
+        }
+    }
+    
 }
