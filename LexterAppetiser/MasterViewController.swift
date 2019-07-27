@@ -32,88 +32,43 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         }
         
         self.executeSearch(["",""], completion: { [unowned self] results in
-            DispatchQueue.main.async(execute: {
-            
+            DispatchQueue.main.async {
                 let context = self.fetchedResultsController.managedObjectContext
                 
-                let ids = (results)
-                    .map({ (item) -> String in
-                        if let trackId = item["trackId"] as? Int64 {
-                            return "trackId == \(trackId)"
-                        }
-                        return ""
-                    })
-                    .joined(separator: " OR ")
-                
-                var existingIds: [Int64] = []
-                
-                let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Track")
-                fetchRequest.predicate = NSPredicate(format: "\(ids)")
-                do {
-                    let fRes = try context.fetch(fetchRequest)
-                    if fRes.count > 0 {
-                        existingIds = (fRes as! [Track])
-                                        .map({ (item) -> Int64 in
-                                            item.trackId
-                                        })
-                    }
-                }
-                catch {
-                    print("FETCH ERROR")
-                }
-                
-                _ = (results)
-                    .filter {
-                        if let trackId = $0["trackId"] as? Int64 {
-                            return !existingIds.contains(trackId)
-                        }
-                        return false
-                    }
-                    .map({ item -> Track in
-                        let t = Track.createInContext(context)
-                        t.mapData(item)
-                        
-                        if let url = URL(string: t.artworkUrl100!) {
-                            
-                            var filename = url.pathComponents.last!
-                            let ext = filename.components(separatedBy: ".").last!
-                            
-                            self.defaultSession.dataTask(with: url) { [unowned self] (data, resp, error) in
-                                
-                                guard error == nil else {
-                                    t.isDownloadingArtwork = false
-                                    return
-                                }
-                                
-                                let tempDir = NSURL.fileURL(withPath: NSTemporaryDirectory(), isDirectory: true)
-                                filename = "\(UUID().uuidString).\(ext)"
-                                let targetURL = tempDir.appendingPathComponent(filename)
+                for item in results {
+                    let trackId = item["trackId"] as! Int64
+                    let t = (Track.fetchObject(predicate: NSPredicate(format: "trackId == \(trackId)"), context: context) ?? Track.createInContext(context))
+                    t.mapData(item)
+                    guard t.localArtworkPath == nil else { return }
+                    if let url = URL(string: t.artworkUrl100!) {
+
+                        var filename = url.pathComponents.last!
+                        let ext = filename.components(separatedBy: ".").last!
+
+                        self.defaultSession.dataTask(with: url) { (data, resp, error) in
+
+                            guard error == nil else {
+                                t.isDownloadingArtwork = false
+                                return
+                            }
+
+                            let tempDir = NSURL.fileURL(withPath: NSTemporaryDirectory(), isDirectory: true)
+                            filename = "\(UUID().uuidString).\(ext)"
+                            let targetURL = tempDir.appendingPathComponent(filename)
                                 t.localArtworkPath = filename
                                 t.isDownloadingArtwork = true
-                                
-                                do {
-                                    try data!.write(to: targetURL)
-                                }
-                                catch let e {
-                                    print(e)
-                                }
-                                
-                            }.resume()
-                        } // END OF: if let url = URL(string: t.artworkUrl100!) {
-                        
-                        return t
-                    })
-                
-                // Save the context.
-//                do {
-//                    try context.save()
-//                } catch {
-//                    // Replace this implementation with code to handle the error appropriately.
-//                    // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-//                    let nserror = error as NSError
-//                    fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-//                }
-            })
+
+                            do {
+                                try data!.write(to: targetURL)
+                            }
+                            catch let e {
+                                print(e)
+                            }
+
+                        }.resume()
+                    } // END OF: if let url = URL(string: t.artworkUrl100!) {
+                }
+            }
         })
     }
 
@@ -195,8 +150,10 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     }
 
     func configureCell(_ cell: TrackCell, withEvent event: Track) {
-        cell.cellData = event
-        cell.configure()
+        DispatchQueue.main.async {
+            cell.cellData = event
+            cell.configure()
+        }
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -259,6 +216,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     }
 
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        print((anObject as? Track)?.localArtworkPath)
         switch type {
             case .insert:
                 tableView.insertRows(at: [newIndexPath!], with: .fade)
