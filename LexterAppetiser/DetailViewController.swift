@@ -20,17 +20,18 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var genreLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var previewButton: UIButton!
 
     func configureView() {
         // Update the user interface for the detail item.
-        guard track != nil else { return }
-        
-        titleLabel.text = track!.trackName
-        genreLabel.text = track!.primaryGenreName
-        priceLabel.text = "\(track!.trackPrice)"
-        let fullPath: String = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(track!.localArtworkPath!).path
-        trackImageView.image = UIImage(contentsOfFile: fullPath)
-        descriptionLabel.text = track!.trackLongDescription
+        if let t = track {
+            titleLabel.text = t.trackName
+            genreLabel.text = t.primaryGenreName
+            priceLabel.text = "\(t.currency!)\(t.trackPrice)"
+            descriptionLabel.text = t.trackLongDescription
+            let fullPath: String = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(t.localArtworkPath!).path
+            trackImageView.image = UIImage(contentsOfFile: fullPath)
+        }
     }
 
     override func viewDidLoad() {
@@ -42,7 +43,7 @@ class DetailViewController: UIViewController {
     var track: Track? {
         didSet {
             // Update the view.
-            configureView()
+//            configureView()
         }
     }
 

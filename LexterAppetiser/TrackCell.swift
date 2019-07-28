@@ -9,7 +9,10 @@
 import UIKit
 import CoreData
 
+/// A custom table view cell that renders the track info.
 class TrackCell: UITableViewCell {
+    
+    // MARK: - Properties
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var genreLabel: UILabel!
@@ -17,10 +20,12 @@ class TrackCell: UITableViewCell {
     @IBOutlet weak var trackImageView: UIImageView!
     @IBOutlet weak var activityView: UIActivityIndicatorView!
     
-    let defaultSession = URLSession(configuration: .default)
-    
+    /// Stores track instance for rendering.
     var cellData: Track!
     
+    // MARK: - Custom Methods
+    
+    /// Maps the track data into the appropriate view components.
     func configure() {        
         self.titleLabel?.text = self.cellData.trackName
         self.genreLabel?.text = self.cellData.primaryGenreName
@@ -37,6 +42,8 @@ class TrackCell: UITableViewCell {
         self.activityView.isHidden = false
         self.trackImageView.image = UIImage(named: "Placeholder")
     }
+    
+    // MARK: - Overrides
 
     override func awakeFromNib() {
         super.awakeFromNib()
