@@ -12,7 +12,7 @@ import CoreData
 class MasterViewController: UITableViewController {
     
     let defaultSession = URLSession(configuration: .default)
-    var dataTask: URLSessionDataTask?
+    var dataTasks: [URLSessionDataTask] = []
 
     var detailViewController: DetailViewController? = nil
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -23,6 +23,8 @@ class MasterViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = "Movies"
         
         self.configureSearchController()
 
@@ -161,6 +163,13 @@ extension MasterViewController {
     /// - param results - Array of Dictionaries
     func persistSearchResults(_ results: [[String: Any]]) {
         DispatchQueue.main.async { [unowned self] in
+            
+            for task in self.dataTasks where task.state == .running || task.state == .suspended {
+                task.cancel()
+            }
+            
+            self.dataTasks.removeAll()
+            
             for item in results {
                 let trackId = item["trackId"] as! Int64
                 let t = (Track.fetchObject(predicate: NSPredicate(format: "trackId == \(trackId)"), context: self.context) ?? Track.createInContext(self.context))
@@ -174,7 +183,7 @@ extension MasterViewController {
                     var filename = url.pathComponents.last!
                     let ext = filename.components(separatedBy: ".").last!
                     
-                    self.defaultSession.dataTask(with: url) { (data, resp, error) in
+                    let task = self.defaultSession.dataTask(with: url) { (data, resp, error) in
                         
                         guard error == nil else {
                             t.isDownloadingArtwork = false
@@ -194,9 +203,12 @@ extension MasterViewController {
                             print(e)
                         }
                         
-                        (UIApplication.shared.delegate as! AppDelegate).saveContext()
-                        
-                    }.resume()
+                        DispatchQueue.main.async { [unowned self] in
+                            (UIApplication.shared.delegate as! AppDelegate).saveContext()
+                            self.tableView.reloadData()
+                        }
+                    }
+                    task.resume()
                 } // END OF: if let url = URL(string: t.artworkUrl100!) {
             }
             

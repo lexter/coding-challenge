@@ -42,6 +42,8 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        self.title = "Details"
+        
         configureView()
         
         UserDefaults.standard.set(self.track!.trackId, forKey: "selectedTrackId")
