@@ -19,6 +19,7 @@ class MasterViewController: UITableViewController {
     
     var tracks: [Track] = []
     var term = ""
+    var selectedTrack: Track?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,13 +31,16 @@ class MasterViewController: UITableViewController {
             detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
         }
         
+        if let trackId = UserDefaults.standard.value(forKey: "selectedTrackId") as? Int64 {
+            self.selectedTrack = Track.fetchWithPredicate(NSPredicate(format: "trackId == \(trackId)"), context: self.context).first
+            self.performSegue(withIdentifier: "showDetail", sender: self)
+        }
+        
         self.tracks = Track.fetch(predicate: nil, sortDescriptors: [["key": "trackName", "ascending": "true"]], context: self.context)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
-        UserDefaults.standard.removeObject(forKey: "selectedTrackId")
-        UserDefaults.standard.synchronize()
         super.viewWillAppear(animated)
     }
 
@@ -44,13 +48,14 @@ class MasterViewController: UITableViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
-            if let indexPath = tableView.indexPathForSelectedRow {
-            let object = self.tracks[indexPath.row]
+//            if let indexPath = tableView.indexPathForSelectedRow {
+//            let object = self.tracks[indexPath.row]
+//                self.selectedTrack = object
                 let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
-                controller.track = object
+                controller.track = self.selectedTrack!
                 controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
                 controller.navigationItem.leftItemsSupplementBackButton = true
-            }
+//            }
         }
     }
 
@@ -69,6 +74,11 @@ class MasterViewController: UITableViewController {
         let event = self.tracks[indexPath.row]
         configureCell(cell, withEvent: event)
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.selectedTrack = self.tracks[indexPath.row]
+        self.performSegue(withIdentifier: "showDetail", sender: self)
     }
 
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

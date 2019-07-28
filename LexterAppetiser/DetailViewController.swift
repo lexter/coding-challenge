@@ -49,6 +49,12 @@ class DetailViewController: UIViewController {
         
         self.descriptionLabel.sizeToFit()
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        UserDefaults.standard.removeObject(forKey: "selectedTrackId")
+        UserDefaults.standard.synchronize()
+        super.viewWillDisappear(animated)
+    }
 
     var track: Track? {
         didSet {

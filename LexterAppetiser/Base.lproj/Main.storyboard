@@ -181,7 +181,6 @@
                                     <outlet property="priceLabel" destination="wfR-X5-UIA" id="j5r-LE-i2e"/>
                                     <outlet property="titleLabel" destination="I85-cG-Vz0" id="P5g-qS-sLA"/>
                                     <outlet property="trackImageView" destination="bPM-yF-li0" id="EtX-Il-KaL"/>
-                                    <segue destination="vC3-pB-5Vb" kind="showDetail" identifier="showDetail" id="6S0-TO-JiA"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -192,6 +191,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Master" id="Zdf-7t-Un8"/>
+                    <connections>
+                        <segue destination="vC3-pB-5Vb" kind="showDetail" identifier="showDetail" id="pCn-Ic-OSG"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rux-fX-hf1" sceneMemberID="firstResponder"/>
             </objects>
@@ -218,6 +220,6 @@
         <image name="Placeholder" width="48" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="6S0-TO-JiA"/>
+        <segue reference="pCn-Ic-OSG"/>
     </inferredMetricsTieBreakers>
 </document>
