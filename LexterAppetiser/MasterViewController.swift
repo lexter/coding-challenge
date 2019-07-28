@@ -50,14 +50,10 @@ class MasterViewController: UITableViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
-//            if let indexPath = tableView.indexPathForSelectedRow {
-//            let object = self.tracks[indexPath.row]
-//                self.selectedTrack = object
-                let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
-                controller.track = self.selectedTrack!
-                controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
-                controller.navigationItem.leftItemsSupplementBackButton = true
-//            }
+            let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
+            controller.track = self.selectedTrack!
+            controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
+            controller.navigationItem.leftItemsSupplementBackButton = true
         }
     }
 
@@ -73,8 +69,8 @@ class MasterViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TrackCell", for: indexPath) as! TrackCell
-        let event = self.tracks[indexPath.row]
-        configureCell(cell, withEvent: event)
+        let track = self.tracks[indexPath.row]
+        configureCell(cell, withTrack: track)
         return cell
     }
     
@@ -88,10 +84,14 @@ class MasterViewController: UITableViewController {
         return true
     }
 
-    func configureCell(_ cell: TrackCell, withEvent event: Track) {
+    func configureCell(_ cell: TrackCell, withTrack track: Track) {
         DispatchQueue.main.async {
-            cell.cellData = event
+            cell.cellData = track
+            cell.defaultSession = self.defaultSession
             cell.configure()
+            if let task = cell.downloadArtworkIfNeeded() {
+                self.dataTasks.append(task)
+            }
         }
     }
     
@@ -175,41 +175,41 @@ extension MasterViewController {
                 let t = (Track.fetchObject(predicate: NSPredicate(format: "trackId == \(trackId)"), context: self.context) ?? Track.createInContext(self.context))
                 t.mapData(item)
                 
-                /// If the localArtwork is already downloaded, just return immediately.
-                guard t.localArtworkPath == nil else { return }
-                
-                if let url = URL(string: t.artworkUrl100!) {
-                    
-                    var filename = url.pathComponents.last!
-                    let ext = filename.components(separatedBy: ".").last!
-                    
-                    let task = self.defaultSession.dataTask(with: url) { (data, resp, error) in
-                        
-                        guard error == nil else {
-                            t.isDownloadingArtwork = false
-                            return
-                        }
-                        
-                        let tempDir = NSURL.fileURL(withPath: NSTemporaryDirectory(), isDirectory: true)
-                        filename = "\(UUID().uuidString).\(ext)"
-                        let targetURL = tempDir.appendingPathComponent(filename)
-                        t.localArtworkPath = filename
-                        t.isDownloadingArtwork = true
-                        
-                        do {
-                            try data!.write(to: targetURL)
-                        }
-                        catch let e {
-                            print(e)
-                        }
-                        
-                        DispatchQueue.main.async { [unowned self] in
-                            (UIApplication.shared.delegate as! AppDelegate).saveContext()
-                            self.tableView.reloadData()
-                        }
-                    }
-                    task.resume()
-                } // END OF: if let url = URL(string: t.artworkUrl100!) {
+//                /// If the localArtwork is already downloaded, just return immediately.
+//                guard t.localArtworkPath == nil else { return }
+//
+//                if let url = URL(string: t.artworkUrl100!) {
+//
+//                    var filename = url.pathComponents.last!
+//                    let ext = filename.components(separatedBy: ".").last!
+//
+//                    let task = self.defaultSession.dataTask(with: url) { (data, resp, error) in
+//
+//                        guard error == nil else {
+//                            t.isDownloadingArtwork = false
+//                            return
+//                        }
+//
+//                        let tempDir = NSURL.fileURL(withPath: NSTemporaryDirectory(), isDirectory: true)
+//                        filename = "\(UUID().uuidString).\(ext)"
+//                        let targetURL = tempDir.appendingPathComponent(filename)
+//                        t.localArtworkPath = filename
+//                        t.isDownloadingArtwork = true
+//
+//                        do {
+//                            try data!.write(to: targetURL)
+//                        }
+//                        catch let e {
+//                            print(e)
+//                        }
+//
+//                        DispatchQueue.main.async { [unowned self] in
+//                            (UIApplication.shared.delegate as! AppDelegate).saveContext()
+//                            self.tableView.reloadData()
+//                        }
+//                    }
+//                    task.resume()
+//                } // END OF: if let url = URL(string: t.artworkUrl100!) {
             }
             
             (UIApplication.shared.delegate as! AppDelegate).saveContext()

@@ -22,6 +22,7 @@ class TrackCell: UITableViewCell {
     
     /// Stores track instance for rendering.
     var cellData: Track!
+    var defaultSession: URLSession!
     
     // MARK: - Custom Methods
     
@@ -54,5 +55,51 @@ class TrackCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func downloadArtworkIfNeeded() -> URLSessionDataTask? {
+        let t = self.cellData!
+        
+        /// If the localArtwork is already downloaded, just return immediately.
+        guard t.localArtworkPath == nil else { return nil }
+        
+        if let url = URL(string: t.artworkUrl100!) {
+            
+            var filename = url.pathComponents.last!
+            let ext = filename.components(separatedBy: ".").last!
+            
+            let task = self.defaultSession.dataTask(with: url) { (data, resp, error) in
+                
+                guard error == nil else {
+                    t.isDownloadingArtwork = false
+                    return
+                }
+                
+                let tempDir = NSURL.fileURL(withPath: NSTemporaryDirectory(), isDirectory: true)
+                filename = "\(UUID().uuidString).\(ext)"
+                let targetURL = tempDir.appendingPathComponent(filename)
+                t.localArtworkPath = filename
+                t.isDownloadingArtwork = true
+                
+                do {
+                    try data!.write(to: targetURL)
+                }
+                catch let e {
+                    print(e)
+                }
+                
+                DispatchQueue.main.async { [unowned self] in
+                    (UIApplication.shared.delegate as! AppDelegate).saveContext()
+                    self.activityView.stopAnimating()
+                    self.activityView.isHidden = true
+                    let fullPath: String = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(t.localArtworkPath!).path
+                    self.trackImageView.image = UIImage(contentsOfFile: fullPath)
+                }
+            }
+            task.resume()
+            return task
+            
+        } // END OF: if let url = URL(string: t.artworkUrl100!) {
+        return nil
     }
 }
