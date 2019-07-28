@@ -33,7 +33,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         
         self.executeSearch(["",""], completion: { [unowned self] results in
             DispatchQueue.main.async {
-                let context = self.fetchedResultsController.managedObjectContext
+                let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
                 
                 for item in results {
                     let trackId = item["trackId"] as! Int64
@@ -103,7 +103,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             if let indexPath = tableView.indexPathForSelectedRow {
             let object = fetchedResultsController.object(at: indexPath)
                 let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
-                controller.detailItem = object
+                controller.track = object
                 controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
                 controller.navigationItem.leftItemsSupplementBackButton = true
             }
@@ -216,17 +216,20 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     }
 
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        print((anObject as? Track)?.localArtworkPath)
         switch type {
             case .insert:
                 tableView.insertRows(at: [newIndexPath!], with: .fade)
             case .delete:
                 tableView.deleteRows(at: [indexPath!], with: .fade)
             case .update:
-                configureCell(tableView.cellForRow(at: indexPath!) as! TrackCell, withEvent: anObject as! Track)
+                if let cell = tableView.cellForRow(at: indexPath!) as? TrackCell {
+                    configureCell(cell, withEvent: anObject as! Track)
+                }
             case .move:
-                configureCell(tableView.cellForRow(at: indexPath!) as! TrackCell, withEvent: anObject as! Track)
-                tableView.moveRow(at: indexPath!, to: newIndexPath!)
+                if let cell = tableView.cellForRow(at: indexPath!) as? TrackCell {
+                    configureCell(cell, withEvent: anObject as! Track)
+                    tableView.moveRow(at: indexPath!, to: newIndexPath!)
+                }
         }
     }
 
@@ -263,11 +266,11 @@ extension MasterViewController: UISearchResultsUpdating {
     }
 }
 
+// MARK: - Extension for HTTP Request.
 extension MasterViewController {
     
     func executeSearch(_ params: [String], completion: @escaping (_ results: [[String: Any]]) -> Void) {
         let baseURL = "https://itunes.apple.com/search?term=star&country=au&media=movie&all"
-        print("executeSearch")
         self.defaultSession.dataTask(with: URL(string: baseURL)!) { (data, response, error) in
             guard error == nil else {
                 print("HTTP ERROR ---> \(error!)")

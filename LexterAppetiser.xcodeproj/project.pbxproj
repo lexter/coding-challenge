@@ -109,6 +109,7 @@
 		50C1FF0F22E7F6AB003EE148 /* LexterAppetiser */ = {
 			isa = PBXGroup;
 			children = (
+				DDADEFC322EC8E33005B24E2 /* NSManagedObject+Custom.swift */,
 				50C1FF4722E80B7D003EE148 /* Track+CoreDataClass.swift */,
 				50C1FF4822E80B7D003EE148 /* Track+CoreDataProperties.swift */,
 				50C1FF1022E7F6AB003EE148 /* AppDelegate.swift */,
@@ -120,7 +121,6 @@
 				50C1FF1E22E7F6AC003EE148 /* LaunchScreen.storyboard */,
 				50C1FF2122E7F6AC003EE148 /* Info.plist */,
 				50C1FF1222E7F6AB003EE148 /* LexterAppetiser.xcdatamodeld */,
-				DDADEFC322EC8E33005B24E2 /* NSManagedObject+Custom.swift */,
 			);
 			path = LexterAppetiser;
 			sourceTree = "<group>";

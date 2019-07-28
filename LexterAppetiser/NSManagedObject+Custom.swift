@@ -1,9 +1,9 @@
 //
 //  NSManagedObject+Custom.swift
-//  LexterAppetiser
+//  Lexlab
 //
-//  Created by Lexter Labra on 27/07/2019.
-//  Copyright © 2019 Lexter Labra. All rights reserved.
+//  Created by Lexter Labra on 6/12/15.
+//  Copyright © 2015 Lexter Labra. All rights reserved.
 //
 
 import Foundation
@@ -215,68 +215,4 @@ extension NSManagedObject {
     class func delete(_ managedObject: AnyObject, context: NSManagedObjectContext) {
         context.delete(objcast(managedObject))
     }
-    
-    // MARK: - Managed Object Utilities
-    
-    // -------------------------------------------------------------------------------------------------------------------------------
-    // -------------------------------------------------------------------------------------------------------------------------------
-    // Taken from http://stackoverflow.com/questions/24844681/list-of-classs-properties-in-swift
-    /**
-     List all properties of the class and return them in an array.
-     
-     - returns: array  Array contains the list of the properties along with its data type.
-     */
-    //    final func allProperties() -> [[String: String]] {
-    //        var propertyNames: [[String: String]] = []
-    /*var count: UInt32 = 0
-     autoreleasepool { () -> () in
-     let properties: UnsafeMutablePointer <objc_property_t> = class_copyPropertyList(self.classForCoder , &count);
-     let intCount = Int(count)
-     for i in 0 ..< intCount {
-     autoreleasepool(invoking: {
-     let property: objc_property_t = properties[i]
-     
-     // Get the property's declared name
-     let name = NSString(utf8String: property_getName(property))!
-     
-     // -------------------------------------------------------------------------------------------------------------------------------
-     // -------------------------------------------------------------------------------------------------------------------------------
-     // This solution is taken from  http://stackoverflow.com/questions/25517073/ios-how-do-i-get-an-objects-propertys-type-in-swift
-     //
-     // Get the property's Data Type
-     let attr = String(validatingUTF8: property_getAttributes(property))!.components(separatedBy: ",")
-     var varType = attr.first!.replacingOccurrences(of: "T@", with: "", options: NSString.CompareOptions.regularExpression, range: nil)
-     varType = varType.replacingOccurrences(of: "\"", with: "", options: NSString.CompareOptions.regularExpression, range: nil)
-     
-     // If the data tpye is empty, it means it is of type String.
-     // Hence, explicitly assign "String" for dev friendly purposes.
-     varType = varType.isEmpty ? "String" : varType
-     
-     propertyNames.append(["name": (name as String), "dataType": varType])
-     })
-     }
-     free(properties);
-     }*/
-    //        return propertyNames;
-    //    }
-    // -------------------------------------------------------------------------------------------------------------------------------
-    
-    /**
-     Map the source data key-values to the managed object fields-values respectively.
-     This is a case sensitive assignment.
-     Both source and destination keys/fields must match.
-     
-     - parameter dictionary:  Source data that contains the key-value pair.
-     */
-//    @objc func mapData(_ sourceData: [String: AnyObject]) {
-        //        let props: [[String: String]] = self.allProperties()
-        //        for dictProp in props {
-        //            let dataType = dictProp["dataType"]!
-        //            if dataType == "NSSet" || dataType == "NSMutableSet" || dataType == "NSArray" || dataType == "NSMutableArray" || dataType == "NSDictionary" || dataType == "NSMutableDictionary" || dataType == "Array" || dataType == "Dictionary" { continue }
-        //            let prop = dictProp["name"]!
-        //            let value: AnyObject? = sourceData[prop]
-        //            if (value is NSNull || value == nil) { continue }
-        //            self.setValue(sourceData[prop], forKey: prop)
-        //        }
-//    }
 }
