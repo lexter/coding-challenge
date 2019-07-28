@@ -29,8 +29,13 @@ class DetailViewController: UIViewController {
             genreLabel.text = t.primaryGenreName
             priceLabel.text = "\(t.currency!)\(t.trackPrice)"
             descriptionLabel.text = t.trackLongDescription
-            let fullPath: String = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(t.localArtworkPath!).path
-            trackImageView.image = UIImage(contentsOfFile: fullPath)
+            if let localArtworkPath = t.localArtworkPath {
+                let fullPath: String = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(localArtworkPath).path
+                trackImageView.image = UIImage(contentsOfFile: fullPath)
+            }
+            else {
+                trackImageView.image = UIImage(named: "Placeholder")
+            }
         }
     }
 
