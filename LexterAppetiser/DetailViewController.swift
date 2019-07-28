@@ -46,6 +46,8 @@ class DetailViewController: UIViewController {
         
         UserDefaults.standard.set(self.track!.trackId, forKey: "selectedTrackId")
         UserDefaults.standard.synchronize()
+        
+        self.descriptionLabel.sizeToFit()
     }
 
     var track: Track? {
