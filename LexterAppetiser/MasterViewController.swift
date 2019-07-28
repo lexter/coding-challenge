@@ -11,14 +11,24 @@ import CoreData
 
 class MasterViewController: UITableViewController {
     
+    /// Default URLSession instance for HTTP requests.
     let defaultSession = URLSession(configuration: .default)
+    
+    /// Stores URLSessionDataTask instances that downloads the artworks.
     var dataTasks: [URLSessionDataTask] = []
 
     var detailViewController: DetailViewController? = nil
+    
+    /// An NSManagedOnbjectContext reference from the AppDelegate.
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
+    /// Stores the tracks for table rendering
     var tracks: [Track] = []
+    
+    /// Search term
     var term = ""
+    
+    /// Holds a referece to selected task in the list.
     var selectedTrack: Track?
 
     override func viewDidLoad() {
@@ -115,6 +125,7 @@ class MasterViewController: UITableViewController {
 
 extension MasterViewController: UISearchResultsUpdating {
     
+    /// Configure the Search Controller
     func configureSearchController() {
         let search = UISearchController(searchResultsController: nil)
         search.searchResultsUpdater = self
@@ -138,6 +149,9 @@ extension MasterViewController: UISearchResultsUpdating {
 // MARK: - Extension for HTTP Request.
 extension MasterViewController {
     
+    /// Performs the call to HTTP search.
+    /// - Parameter term: Search keyword
+    /// - Parameter completion: A completion block accepting results parameters.
     func executeSearch(_ term: String, completion: @escaping (_ results: [[String: Any]]) -> Void) {
         let baseURL = "https://itunes.apple.com/search?term=\(term)&country=au&media=movie&all"
         self.defaultSession.dataTask(with: URL(string: baseURL)!) { (data, response, error) in
@@ -160,7 +174,7 @@ extension MasterViewController {
     }
     
     /// Maps the serach results into local storage.
-    /// - param results - Array of Dictionaries
+    /// - Parameter results: Array of Dictionaries
     func persistSearchResults(_ results: [[String: Any]]) {
         DispatchQueue.main.async { [unowned self] in
             
@@ -174,42 +188,6 @@ extension MasterViewController {
                 let trackId = item["trackId"] as! Int64
                 let t = (Track.fetchObject(predicate: NSPredicate(format: "trackId == \(trackId)"), context: self.context) ?? Track.createInContext(self.context))
                 t.mapData(item)
-                
-//                /// If the localArtwork is already downloaded, just return immediately.
-//                guard t.localArtworkPath == nil else { return }
-//
-//                if let url = URL(string: t.artworkUrl100!) {
-//
-//                    var filename = url.pathComponents.last!
-//                    let ext = filename.components(separatedBy: ".").last!
-//
-//                    let task = self.defaultSession.dataTask(with: url) { (data, resp, error) in
-//
-//                        guard error == nil else {
-//                            t.isDownloadingArtwork = false
-//                            return
-//                        }
-//
-//                        let tempDir = NSURL.fileURL(withPath: NSTemporaryDirectory(), isDirectory: true)
-//                        filename = "\(UUID().uuidString).\(ext)"
-//                        let targetURL = tempDir.appendingPathComponent(filename)
-//                        t.localArtworkPath = filename
-//                        t.isDownloadingArtwork = true
-//
-//                        do {
-//                            try data!.write(to: targetURL)
-//                        }
-//                        catch let e {
-//                            print(e)
-//                        }
-//
-//                        DispatchQueue.main.async { [unowned self] in
-//                            (UIApplication.shared.delegate as! AppDelegate).saveContext()
-//                            self.tableView.reloadData()
-//                        }
-//                    }
-//                    task.resume()
-//                } // END OF: if let url = URL(string: t.artworkUrl100!) {
             }
             
             (UIApplication.shared.delegate as! AppDelegate).saveContext()
