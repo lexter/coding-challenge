@@ -35,6 +35,8 @@ class MasterViewController: UITableViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
+        UserDefaults.standard.removeObject(forKey: "selectedTrackId")
+        UserDefaults.standard.synchronize()
         super.viewWillAppear(animated)
     }
 
@@ -86,7 +88,14 @@ class MasterViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Today"
+        print(UserDefaults.standard.value(forKey: "lastActive"))
+        if let lastActive = UserDefaults.standard.value(forKey: "lastActive") {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MMM dd HH:mm"
+            let dateStr = dateFormatter.string(from: lastActive as! Date)
+            return dateStr
+        }
+        return nil
     }
 }
 

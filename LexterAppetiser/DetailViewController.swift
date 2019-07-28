@@ -38,6 +38,9 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         configureView()
+        
+        UserDefaults.standard.set(self.track!.trackId, forKey: "selectedTrackId")
+        UserDefaults.standard.synchronize()
     }
 
     var track: Track? {
