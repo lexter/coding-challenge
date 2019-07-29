@@ -22,6 +22,8 @@ class TrackCell: UITableViewCell {
     
     /// Stores track instance for rendering.
     var cellData: Track!
+    
+    /// Holds a reference of URLSession
     var defaultSession: URLSession!
     
     // MARK: - Custom Methods
@@ -57,6 +59,8 @@ class TrackCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    /// Downloads the Artwork if it is not yet available in local.
+    /// - Returns: Instance of URLSessionDataTask when needs to download; otherwise, nil.
     func downloadArtworkIfNeeded() -> URLSessionDataTask? {
         let t = self.cellData!
         

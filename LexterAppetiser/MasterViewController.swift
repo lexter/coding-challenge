@@ -110,12 +110,11 @@ class MasterViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        print(UserDefaults.standard.value(forKey: "lastActive"))
         if let lastActive = UserDefaults.standard.value(forKey: "lastActive") {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "MMM dd HH:mm"
             let dateStr = dateFormatter.string(from: lastActive as! Date)
-            return dateStr
+            return "Last Active - \(dateStr)"
         }
         return nil
     }
@@ -130,6 +129,7 @@ extension MasterViewController: UISearchResultsUpdating {
         let search = UISearchController(searchResultsController: nil)
         search.searchResultsUpdater = self
         search.obscuresBackgroundDuringPresentation = false
+        search.hidesNavigationBarDuringPresentation = false
         search.searchBar.placeholder = "Search for a movie"
         navigationItem.searchController = search
     }
